@@ -1,0 +1,102 @@
+### Example 1:
+            Question: "Show me the number of employee's performance is "Satisfactory""
+            SQL Query: SELECT COUNT(DISTINCT ep.EMPLOYEEID) FROM DATMOK.EMPLOYEE_PERFORMANCE ep WHERE ep.PERFORMANCE = 'Satisfactory';
+
+
+            ### Example 2:
+            Question: "List top 10 sales orders in year 2018."
+            SQL Query:SELECT so.SALESORDERID as "Sales Order",    bp.COMPANYNAME as "Business
+                Partner",    so.CREATEDAT as "Sales Order Creation Date",
+                YEAR(so.CREATEDAT) as "Year of Sales Order Creation",    so.GROSSAMOUNT
+                as "Gross Amount"FROM     DATMOK.SALES_ORDERS as soJOIN
+                DATMOK.BUSINESS_PARTNERS as bp ON so.PARTNERID = bp.PARTNERIDWHERE
+                YEAR(so.CREATEDAT) = 2018ORDER BY     so.GROSSAMOUNT DESCLIMIT 10;
+
+
+
+            ### Example 3:
+            Question: "Show me the transaction details in year '2018'."
+            SQL Query:
+            SELECT
+             ft.TRANSACTIONID as "Transaction ID",        ft.DATE as "Transaction
+            Date",        YEAR(ft.DATE) as "Year of Transaction",
+            QUARTER(ft.DATE) as "Quarter of Transaction",        ft.VERSION as
+            "Transaction Version",        ft.VALUE as "Value"FROM
+            DATMOK.FINANCIAL_TRANSACTIONS as ftWHERE YEAR(ft.DATE) = 2018ORDER BY
+            ft.VALUE DESC;
+
+             ### Example 4:
+            Question: "List all employees in department 'Office of CEO'."
+            SQL Query:
+            SELECT
+             epd.FULLNAME,     dep.SHORT_DESCRIPTION AS "Department"FROM
+            DATMOK.EMPLOYEE_HEADCOUNT ehJOIN     DATMOK.EMPLOYEE_PERSONAL_DATA epd
+            ON eh.EMPLOYEEID = epd.EMPLOYEEIDJOIN     DATMOK.DEPARTMENT_TEXTS dep ON
+             eh.DEPARTMENTID = dep.DEPARTMENTID AND dep.LANGUAGE = 'EN'WHERE
+            dep.SHORT_DESCRIPTION = 'Office of CEO';
+
+             ### Example 5:
+            Question: "How many products we have?"
+            SQL Query:
+            SELECT COUNT(DISTINCT p.PRODUCTID) AS "Number of Products"FROM DATMOK.PRODUCTS p;
+
+
+            ### Example 6:
+            Question: "List the top 10 BP sales in sales organization "APJ"."
+            SQL Query:SELECT bp."COMPANYNAME" AS "Business Partner",
+       SUM(TO_DECIMAL(soi."GROSSAMOUNT", 32, 2)) AS "Total Gross Amount"
+FROM DATMOK."SALES_ORDERS" so
+JOIN DATMOK."BUSINESS_PARTNERS" bp ON so."PARTNERID" = bp."PARTNERID"
+JOIN DATMOK."SALES_ORDER_ITEMS" soi ON so."SALESORDERID" = soi."SALESORDERID"
+WHERE so."SALESORG" = 'APJ'
+GROUP BY bp."COMPANYNAME"
+ORDER BY "Total Gross Amount" DESC
+LIMIT 10;
+
+
+            ### Example 7:
+            Question: "Pull the SO details in year 2018 in "APJ"."
+            SQL Query:SELECT
+     so.SALESORDERID as "Sales Order",    bp.COMPANYNAME as "Business
+Partner",    so.CREATEDAT as "Sales Order Creation Date",
+YEAR(so.CREATEDAT) as "Year of Sales Order Creation",
+QUARTER(so.CREATEDAT) as "Quarter of Sales Order Creation",
+so.SALESORG as "Sales Organization",    soi.SALESORDERITEM as "Sales
+Order Item",    prod.MEDIUM_DESCR as "Product"FROM
+DATMOK.SALES_ORDERS as soJOIN     DATMOK.BUSINESS_PARTNERS as bp ON
+so.PARTNERID = bp.PARTNERIDJOIN     DATMOK.SALES_ORDER_ITEMS soi ON
+so.SALESORDERID = soi.SALESORDERIDJOIN     DATMOK.PRODUCT_TEXTS prod ON
+soi.PRODUCTID = prod.PRODUCTIDWHERE     YEAR(so.CREATEDAT) = 2018
+AND so.SALESORG = 'APJ'ORDER BY     so.SALESORDERID DESC;
+
+
+
+            ### Example 8:
+            Question: "List top 10 sales products per BP in year 2018."
+            SQL Query:SELECT bp."COMPANYNAME" AS "Business Partner",
+       prod."MEDIUM_DESCR" AS "Product",
+       SUM(TO_DECIMAL(soi."GROSSAMOUNT", 32, 2)) AS "Total Gross Amount"
+FROM DATMOK."SALES_ORDERS" so
+JOIN DATMOK."BUSINESS_PARTNERS" bp ON so."PARTNERID" = bp."PARTNERID"
+JOIN DATMOK."SALES_ORDER_ITEMS" soi ON so."SALESORDERID" = soi."SALESORDERID"
+JOIN DATMOK."PRODUCT_TEXTS" prod ON soi."PRODUCTID" = prod."PRODUCTID"
+WHERE YEAR(so."CREATEDAT") = 2018
+GROUP BY bp."COMPANYNAME", prod."MEDIUM_DESCR"
+ORDER BY bp."COMPANYNAME", "Total Gross Amount" DESC
+LIMIT 10;
+
+
+
+            ### Example 9:
+            Question: "which is the bestselling product of 2018? "
+            SQL Query:SELECT prod."MEDIUM_DESCR" AS "Product",
+       SUM(TO_DECIMAL(soi."GROSSAMOUNT", 32, 2)) AS "Total Gross Amount"
+FROM DATMOK."SALES_ORDERS" AS so
+JOIN DATMOK."BUSINESS_PARTNERS" AS bp ON so."PARTNERID" = bp."PARTNERID"
+JOIN DATMOK."SALES_ORDER_ITEMS" AS soi ON so."SALESORDERID" = soi."SALESORDERID"
+JOIN DATMOK."PRODUCT_TEXTS" AS prod ON soi."PRODUCTID" = prod."PRODUCTID"
+WHERE YEAR(so."CREATEDAT") = 2018
+GROUP BY prod."MEDIUM_DESCR"
+ORDER BY "Total Gross Amount" DESC
+LIMIT 1;
+

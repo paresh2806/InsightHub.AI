@@ -1,0 +1,4 @@
+Login: https://accounts.sap.com/oauth2/authorize?response_type=code&scope=openid+email+profile&redirect_uri=https%3A%2F%2Fcockpit.hanatrial.ondemand.com%2Flogin%2Fcallback&client_id=9868c363-bc2d-407f-bc14-2ef649230f6f&state=5600620337062
+
+Database explorer: https://9ee23abctrial.hana-tooling.ingress.orchestration.trial-us10.hanacloud.ondemand.com/hrtt/sap/hana/cst/catalog/cockpit-index.html?databaseid=C286977
+
