@@ -81,10 +81,18 @@ embeddings = GPT4AllEmbeddings(
 ### 4. Prepare HANA Cloud Data
 
 1. Create an HANA Cloud instance in a trial environment [SAP BTP Cockpit](https://cockpit.hanatrial.ondemand.com/trial/#/home/trial).
+
+![SAP BTP Cockpit](https://raw.githubusercontent.com/paresh2806/InsightHub.AI/refs/heads/master/ScreenShots/Screenshot%20from%202024-09-18%2011-53-54.png)
 2. Download sample data from [SAP Sample Content](https://github.com/SAP-samples/datasphere-content/tree/main/SAP_Sample_Content/CSV) and import it into the HANA database.
  or
 3. Use the `SAP-sample-Data` directory to access the required data.
 4. Dump the data to the DB Instance / Data Lake Instance 
+
+
+
+
+![HANA Schema](https://raw.githubusercontent.com/paresh2806/InsightHub.AI/refs/heads/master/schema/DATMOK.png)
+
 5. Verify the results using the `HANA-Connection.ipynb` notebook located in the `Notebook` directory.
 
 ---
