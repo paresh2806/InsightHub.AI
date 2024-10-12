@@ -21,6 +21,19 @@ If you find this project helpful, feel free to support us!
 
 ---
 
+## 📹 Demo Video
+
+### HANA Cloud overview
+https://github.com/user-attachments/assets/5693c218-7e8b-4945-81b3-652e4e1dbb81
+
+### Demo
+https://github.com/user-attachments/assets/ece828ce-4122-459e-83fc-bdc900cc9ff2
+
+
+
+
+
+
 ## Table of Contents
 1. [🚀 Introduction](#introduction)
 2. [💻 How to Run the Demo](#how-to-run-the-demo)
